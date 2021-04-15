@@ -26,5 +26,13 @@
   },
   "devDependencies": {
     "concurrently": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sugerhater/aws.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sugerhater/aws/issues"
+  },
+  "homepage": "https://github.com/sugerhater/aws#readme"
 }
