@@ -7,8 +7,20 @@ const Home = () => {
   const [thoughts, setThoughts] = useState([]);
 
   // const loggedIn = Auth.loggedIn();
-
   useEffect(() => {
+    const fetchData = async () =>{
+      try {
+        const res = await fetch ('/api/users');
+        const jsonData = await res.json();
+        //sort the array by createdAt property ordered by descending values
+        const data = jsonData.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
+        setThoughts([...data]);
+        setIsLoaded(true);
+      } catch (err){
+        console.log(err)
+      }
+    };
+    fetchData();
   }, []);
 
   return (

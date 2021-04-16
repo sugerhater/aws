@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
 
@@ -22,8 +21,19 @@ const Profile = props => {
   }]);
 
   useEffect(() => {
-
-  }, []);
+    const fetchData = async() => {
+      try {
+        const res = await fetch(`/api/users/${userParam}`);
+        const data = await res.json();
+        console.log(data);
+        setThoughts([...data]);
+        setIsLoaded(true);
+      } catch (error){
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [userParam]);
 
   return (
     <div>
