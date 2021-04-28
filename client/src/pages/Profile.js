@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
 
@@ -22,17 +21,19 @@ const Profile = props => {
   }]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`/api/users/${userParam}`);
-      const data = await res.json();
-      // sort the array by createdAt property ordered by descending values
-      // const orderData = data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
-      console.log(data);
-      setThoughts(data);
-      setIsLoaded(true);
-    }
+    const fetchData = async() => {
+      try {
+        const res = await fetch(`/api/users/${userParam}`);
+        const data = await res.json();
+        console.log(data);
+        setThoughts([...data]);
+        setIsLoaded(true);
+      } catch (error){
+        console.log(error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [userParam]);
 
   return (
     <div>
